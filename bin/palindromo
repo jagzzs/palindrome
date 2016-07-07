@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/palindrome'
+
+evaluate_input(ARGV.empty? ? nil : ARGV[0])
