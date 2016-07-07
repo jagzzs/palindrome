@@ -29,7 +29,9 @@ def evaluate_input(input)
   end
 
   if !input.palindrome?
-    abort "Not a palindrome"
+    abort "Input is not a palindrome"
+  else
+    puts "Input is a palindrome"
   end
 
   exit 0
