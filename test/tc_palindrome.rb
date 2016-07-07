@@ -1,4 +1,4 @@
-require_relative "palindrome"
+require "palindrome"
 require "test/unit"
 
 class TestPalindrome < Test::Unit::TestCase
@@ -41,8 +41,14 @@ class TestPalindrome < Test::Unit::TestCase
     assert_equal(phrase.palindrome?, false, "The phrase \"" + phrase + "\" returned that's a palindrome")
   end
 
-  def test_invalid_input_exits
-    assert_raise(SystemExit) { evaluate_input("This is clearly not a palindrome") }
+  def test_invalid_input_exits_with_1
+    assert_raise(SystemExit) do
+      begin
+        evaluate_input("This is clearly not a palindrome")
+      rescue SystemExit => e
+        raise e if e.status == 1
+      end
+    end
   end
 
   #positive tests
@@ -83,7 +89,14 @@ class TestPalindrome < Test::Unit::TestCase
     assert_equal(phrase.palindrome?, true, "The phrase \"" + phrase + "\" returned that's not a palindrome")
   end
 
-  def test_valid_input_does_not_exits
-    assert_nothing_raised(SystemExit) { evaluate_input("abba") }
+  def test_valid_input_exits_with_0
+    assert_nothing_raised(SystemExit) do
+      begin
+        evaluate_input("abba")
+      rescue SystemExit => e
+        raise e unless e.status == 0
+      end
+    end
   end
+
 end
